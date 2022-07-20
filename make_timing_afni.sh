@@ -1,4 +1,5 @@
 # use afni tools to make random timing
+# https://afni.nimh.nih.gov/pub/dist/doc/program_help/make_random_timing.py.html
 
 #quantum task
 #cue 1 s
@@ -37,23 +38,8 @@ rm cmd.3dd.txt
 
 done
 
+# evaulate delay schedule with 3dDeconvolve, the sort by std err of contrast
 for n in $(sort quantum_design_eff.txt | awk '{print $2}' | head -n 20); do
 echo $n
-cp QuantumITI_afni/ITI${n}.txt QuantumITIs/ITI${n}.txt
+cp QuantumITI_afni/ITI${n}.txt QuantITIs/ITI${n}.txt
 done
-
-# make_random_timing.py -num_runs 1 -run_time 480         \
-# -pre_stim_rest 6 -post_stim_rest 6                 \
-# -rand_post_stim_rest no                              \
-# -num_stim 3 \
-# -num_reps 40 \
-# -stim_labels cue probe fb       \
-# -ordered_stimuli cue probe fb \
-# -write_event_list events.adv.3                       \
-# -show_timing_stats                                   \
-# -save_3dd_cmd cmd.3dd.eg3.txt                        \
-# -seed 31415 -prefix stimes.adv.3
-# -num_stim 3 -num_reps 40                                \
-# -min_rest 1 -max_rest 9 \
-# -stim_labels cue probe fb       \
-# -stim_dur 1 1.5 0.5                                \
